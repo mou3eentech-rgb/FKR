@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="خدمات الإعلام الآلي القاعدية للمكاتب والمدارس - صيانة، شبكات، دعم تقني" />
+  <title>TechBase Services | خدمات الإعلام الآلي</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Poppins:wght@300;400;600;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    /* ============================================================
+       ROOT DESIGN SYSTEM
+    ============================================================ */
+    :root {
+      --primary:    #6C63FF;
+      --primary-d:  #4F46E5;
+      --accent:     #00D4FF;
+      --accent2:    #FF6584;
+      --bg:         #0A0B1A;
+      --bg2:        #0F1030;
+      --bg3:        #141535;
+      --glass:      rgba(255,255,255,0.04);
+      --glass-b:    rgba(255,255,255,0.08);
+      --text:       #E8E8F0;
+      --text-dim:   #9090B0;
+      --white:      #FFFFFF;
+      --radius-lg:  20px;
+      --radius-xl:  32px;
+      --shadow:     0 24px 64px rgba(108,99,255,0.15);
+      --transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Cairo', 'Poppins', sans-serif;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body.ltr {
+      font-family: 'Poppins', 'Cairo', sans-serif;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ============================================================
+       BACKGROUND ANIMATED GRADIENT
+    ============================================================ */
+    .bg-glow {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+    }
+    .bg-glow::before {
+      content: '';
+      position: absolute;
+      width: 900px; height: 900px;
+      background: radial-gradient(circle, rgba(108,99,255,0.15) 0%, transparent 70%);
+      top: -300px; left: -200px;
+      animation: drift1 18s ease-in-out infinite alternate;
+    }
+    .bg-glow::after {
+      content: '';
+      position: absolute;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(0,212,255,0.10) 0%, transparent 70%);
+      bottom: -200px; right: -100px;
+      animation: drift2 14s ease-in-out infinite alternate;
+    }
+    @keyframes drift1 { from { transform: translate(0,0) scale(1); } to { transform: translate(120px,80px) scale(1.2); } }
+    @keyframes drift2 { from { transform: translate(0,0) scale(1); } to { transform: translate(-80px,-60px) scale(1.15); } }
+
+    /* ============================================================
+       LAYOUT
+    ============================================================ */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+    section { padding: 100px 0; }
+
+    /* ============================================================
+       NAVBAR
+    ============================================================ */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 18px 0;
+      transition: var(--transition);
+    }
+    #navbar.scrolled {
+      background: rgba(10,11,26,0.90);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-b);
+      padding: 12px 0;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.4);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .nav-logo .logo-icon {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; color: #fff;
+      box-shadow: 0 4px 20px rgba(108,99,255,0.5);
+    }
+    .nav-logo span {
+      font-weight: 900; font-size: 1.3rem;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .nav-links {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .nav-links a {
+      padding: 8px 18px; border-radius: 50px;
+      font-size: 0.9rem; font-weight: 600;
+      color: var(--text-dim);
+      transition: var(--transition);
+      position: relative;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--white);
+      background: var(--glass-b);
+    }
+
+    /* Language Switcher */
+    .lang-switcher {
+      display: flex; align-items: center; gap: 6px;
+      background: var(--glass); border: 1px solid var(--glass-b);
+      border-radius: 50px; padding: 5px 8px;
+    }
+    .lang-btn {
+      background: none; border: none; cursor: pointer;
+      padding: 5px 12px; border-radius: 50px;
+      font-size: 0.8rem; font-weight: 700;
+      color: var(--text-dim);
+      transition: var(--transition);
+    }
+    .lang-btn.active, .lang-btn:hover {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #fff;
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 6px; background: none; border: none;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--text); border-radius: 2px;
+      transition: var(--transition);
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      display: none; position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(10,11,26,0.98);
+      backdrop-filter: blur(24px);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center; justify-content: center; gap: 24px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: 1.4rem; font-weight: 700;
+      color: var(--text-dim); transition: var(--transition);
+    }
+    .mobile-menu a:hover { color: var(--primary); }
+    .mobile-close {
+      position: absolute; top: 24px; right: 24px;
+      background: none; border: none; cursor: pointer;
+      font-size: 1.6rem; color: var(--text);
+    }
+
+    /* ============================================================
+       HERO SECTION
+    ============================================================ */
+    #home {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding-top: 100px;
+      position: relative;
+    }
+    .hero-content {
+      max-width: 700px;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(108,99,255,0.15);
+      border: 1px solid rgba(108,99,255,0.3);
+      border-radius: 50px; padding: 8px 20px;
+      font-size: 0.85rem; font-weight: 600;
+      color: var(--accent); margin-bottom: 28px;
+      animation: fadeSlideDown 0.6s ease forwards;
+    }
+    .hero-badge i { animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.5; } }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 900; line-height: 1.2;
+      margin-bottom: 24px;
+      animation: fadeSlideDown 0.6s 0.1s ease forwards; opacity: 0;
+    }
+    .hero-title .gradient-text {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      font-size: 1.1rem; color: var(--text-dim); max-width: 560px;
+      margin-bottom: 40px; line-height: 1.8;
+      animation: fadeSlideDown 0.6s 0.2s ease forwards; opacity: 0;
+    }
+
+    .hero-actions {
+      display: flex; gap: 16px; flex-wrap: wrap;
+      animation: fadeSlideDown 0.6s 0.3s ease forwards; opacity: 0;
+    }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-d));
+      color: #fff; border: none; cursor: pointer;
+      padding: 16px 36px; border-radius: 50px;
+      font-size: 1rem; font-weight: 700;
+      box-shadow: 0 8px 32px rgba(108,99,255,0.4);
+      transition: var(--transition);
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 48px rgba(108,99,255,0.5);
+    }
+
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: transparent;
+      border: 2px solid var(--glass-b);
+      color: var(--text); cursor: pointer;
+      padding: 14px 34px; border-radius: 50px;
+      font-size: 1rem; font-weight: 600;
+      transition: var(--transition);
+    }
+    .btn-outline:hover {
+      border-color: var(--primary); color: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    /* Hero Stats */
+    .hero-stats {
+      display: flex; gap: 40px; margin-top: 60px; flex-wrap: wrap;
+      animation: fadeSlideDown 0.6s 0.4s ease forwards; opacity: 0;
+    }
+    .stat-item { text-align: start; }
+    .stat-num {
+      font-size: 2rem; font-weight: 900;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .stat-label { font-size: 0.85rem; color: var(--text-dim); }
+
+    /* Hero Visual */
+    .hero-visual {
+      position: absolute;
+      left: 0; top: 50%;
+      transform: translateY(-50%);
+      width: 45%;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 1;
+      animation: floatVisual 6s ease-in-out infinite;
+    }
+    [dir="ltr"] .hero-visual { right: 0; left: auto; }
+
+    @keyframes floatVisual {
+      0%,100% { transform: translateY(-50%) translateY(0); }
+      50% { transform: translateY(-50%) translateY(-20px); }
+    }
+
+    .hero-visual-inner {
+      width: 380px; height: 380px;
+      background: linear-gradient(135deg, rgba(108,99,255,0.15), rgba(0,212,255,0.10));
+      border: 1px solid rgba(108,99,255,0.2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .hero-visual-inner::before {
+      content: '';
+      position: absolute; inset: -20px;
+      border-radius: 50%;
+      border: 1px dashed rgba(108,99,255,0.2);
+      animation: spin 20s linear infinite;
+    }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+    .hero-visual-icon {
+      font-size: 6rem;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    /* Floating badges on hero */
+    .float-badge {
+      position: absolute;
+      background: var(--bg3); border: 1px solid var(--glass-b);
+      border-radius: 16px; padding: 12px 18px;
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.8rem; font-weight: 600;
+      box-shadow: var(--shadow);
+      animation: floatBadge 4s ease-in-out infinite;
+    }
+    .float-badge .fbi { font-size: 1.2rem; }
+    .float-badge:nth-child(1) { top: 60px; right: 20px; animation-delay: 0s; }
+    .float-badge:nth-child(2) { bottom: 80px; left: 20px; animation-delay: 1.5s; }
+    .float-badge:nth-child(3) { top: 160px; left: -20px; animation-delay: 0.8s; }
+    @keyframes floatBadge { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+    /* ============================================================
+       SECTION HEADER
+    ============================================================ */
+    .section-header { text-align: center; margin-bottom: 64px; }
+    .section-tag {
+      display: inline-block;
+      background: rgba(108,99,255,0.15);
+      border: 1px solid rgba(108,99,255,0.3);
+      border-radius: 50px; padding: 6px 18px;
+      font-size: 0.8rem; font-weight: 700;
+      color: var(--accent); margin-bottom: 16px;
+      text-transform: uppercase; letter-spacing: 2px;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 900; line-height: 1.25; margin-bottom: 16px;
+    }
+    .section-title .gradient-text {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .section-desc { color: var(--text-dim); max-width: 560px; margin: 0 auto; font-size: 1rem; }
+
+    /* Divider */
+    .section-divider {
+      width: 60px; height: 4px; margin: 20px auto 0;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: 2px;
+    }
+
+    /* ============================================================
+       ABOUT SECTION
+    ============================================================ */
+    #about { background: var(--bg2); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+    }
+    .about-visual {
+      position: relative; display: flex; justify-content: center;
+    }
+    .about-card-main {
+      background: linear-gradient(135deg, rgba(108,99,255,0.1), rgba(0,212,255,0.05));
+      border: 1px solid rgba(108,99,255,0.2);
+      border-radius: var(--radius-xl);
+      padding: 48px;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .about-card-main::before {
+      content: '';
+      position: absolute; top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: conic-gradient(transparent, rgba(108,99,255,0.05), transparent 30%);
+      animation: rotateBg 8s linear infinite;
+    }
+    @keyframes rotateBg { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .about-icon-big {
+      font-size: 5rem; margin-bottom: 24px; display: block;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      position: relative; z-index: 2;
+    }
+    .about-card-main h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 12px; position: relative; z-index: 2; }
+    .about-card-main p { color: var(--text-dim); position: relative; z-index: 2; font-size: 0.95rem; }
+
+    /* Small cards */
+    .about-smalls {
+      position: absolute;
+      bottom: -20px;
+      display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+    }
+    .about-small-card {
+      background: var(--bg3);
+      border: 1px solid var(--glass-b);
+      border-radius: 14px;
+      padding: 14px 20px;
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.82rem; font-weight: 600;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+    .about-small-card i { color: var(--accent); font-size: 1rem; }
+
+    .about-content h2 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 900; margin-bottom: 20px; line-height: 1.3;
+    }
+    .about-content p { color: var(--text-dim); margin-bottom: 20px; line-height: 1.9; }
+    .about-features { display: flex; flex-direction: column; gap: 12px; margin-top: 28px; }
+    .about-feat {
+      display: flex; align-items: flex-start; gap: 14px;
+      background: var(--glass); border: 1px solid var(--glass-b);
+      border-radius: 14px; padding: 16px 20px;
+      transition: var(--transition);
+    }
+    .about-feat:hover { border-color: var(--primary); transform: translateX(-4px); }
+    [dir="ltr"] .about-feat:hover { transform: translateX(4px); }
+    .about-feat-icon {
+      width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--primary), var(--primary-d));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; color: #fff;
+    }
+    .about-feat-text h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
+    .about-feat-text p { font-size: 0.85rem; color: var(--text-dim); margin: 0; }
+
+    /* ============================================================
+       SERVICES SECTION
+    ============================================================ */
+    #services { background: var(--bg); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+    }
+    .service-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-b);
+      border-radius: var(--radius-lg);
+      padding: 36px 28px;
+      transition: var(--transition);
+      position: relative; overflow: hidden;
+      cursor: default;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(108,99,255,0.3);
+      box-shadow: 0 24px 64px rgba(108,99,255,0.15);
+    }
+    .service-icon {
+      width: 64px; height: 64px; border-radius: 18px; margin-bottom: 24px;
+      background: linear-gradient(135deg, rgba(108,99,255,0.2), rgba(0,212,255,0.1));
+      border: 1px solid rgba(108,99,255,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      transition: var(--transition);
+    }
+    .service-icon i {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .service-card:hover .service-icon {
+      background: linear-gradient(135deg, var(--primary), var(--primary-d));
+      border-color: transparent;
+    }
+    .service-card:hover .service-icon i {
+      background: linear-gradient(135deg, #fff, #eee);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .service-card h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 12px; }
+    .service-card p { font-size: 0.9rem; color: var(--text-dim); line-height: 1.8; }
+    .service-link {
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 20px;
+      font-size: 0.88rem; font-weight: 700;
+      color: var(--primary); transition: var(--transition);
+    }
+    .service-link:hover { gap: 14px; }
+
+    /* ============================================================
+       PROCESS / HOW WE WORK
+    ============================================================ */
+    #process { background: var(--bg2); }
+    .process-steps {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px; position: relative;
+    }
+    .process-steps::before {
+      content: '';
+      position: absolute; top: 48px; left: 10%; right: 10%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary), var(--accent), transparent);
+      opacity: 0.3;
+    }
+    .step-card {
+      background: var(--glass); border: 1px solid var(--glass-b);
+      border-radius: var(--radius-lg); padding: 36px 24px; text-align: center;
+      transition: var(--transition);
+    }
+    .step-card:hover {
+      border-color: rgba(108,99,255,0.4);
+      transform: translateY(-6px);
+      box-shadow: var(--shadow);
+    }
+    .step-num {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #fff; font-size: 1.3rem; font-weight: 900;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      box-shadow: 0 8px 24px rgba(108,99,255,0.4);
+    }
+    .step-card h3 { font-size: 1rem; font-weight: 800; margin-bottom: 10px; }
+    .step-card p { font-size: 0.85rem; color: var(--text-dim); }
+
+    /* ============================================================
+       CONTACT SECTION
+    ============================================================ */
+    #contact { background: var(--bg); }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; align-items: start;
+    }
+    .contact-info h2 {
+      font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight: 900; margin-bottom: 16px;
+    }
+    .contact-info p { color: var(--text-dim); margin-bottom: 36px; line-height: 1.9; }
+    .contact-items { display: flex; flex-direction: column; gap: 20px; }
+    .contact-item {
+      display: flex; align-items: center; gap: 16px;
+      background: var(--glass); border: 1px solid var(--glass-b);
+      border-radius: 16px; padding: 18px 22px;
+      transition: var(--transition);
+    }
+    .contact-item:hover { border-color: var(--primary); }
+    .ci-icon {
+      width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--primary), var(--primary-d));
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 1rem;
+    }
+    .ci-text strong { display: block; font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+    .ci-text span { font-size: 0.95rem; font-weight: 600; }
+
+    /* Contact Form */
+    .contact-form {
+      background: var(--glass); border: 1px solid var(--glass-b);
+      border-radius: var(--radius-xl); padding: 44px;
+    }
+    .form-group { margin-bottom: 22px; }
+    .form-group label {
+      display: block; font-size: 0.85rem; font-weight: 700;
+      margin-bottom: 10px; color: var(--text-dim);
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%; background: rgba(255,255,255,0.04);
+      border: 1.5px solid var(--glass-b);
+      border-radius: 14px; padding: 14px 18px;
+      color: var(--text); font-size: 0.95rem;
+      font-family: inherit; transition: var(--transition);
+      outline: none;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      border-color: var(--primary);
+      background: rgba(108,99,255,0.05);
+      box-shadow: 0 0 0 4px rgba(108,99,255,0.1);
+    }
+    .form-group input::placeholder, .form-group textarea::placeholder {
+      color: var(--text-dim);
+    }
+    .form-group textarea { height: 130px; resize: vertical; }
+    .form-group select option { background: var(--bg3); color: var(--text); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .btn-submit {
+      width: 100%; padding: 16px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-d));
+      border: none; border-radius: 14px; cursor: pointer;
+      color: #fff; font-size: 1rem; font-weight: 700;
+      font-family: inherit;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      box-shadow: 0 8px 32px rgba(108,99,255,0.4);
+      transition: var(--transition);
+    }
+    .btn-submit:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 48px rgba(108,99,255,0.5);
+    }
+
+    /* Success Toast */
+    .toast {
+      position: fixed; bottom: 30px;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: #fff; padding: 16px 28px; border-radius: 14px;
+      font-weight: 700; font-size: 0.95rem;
+      box-shadow: 0 8px 32px rgba(34,197,94,0.4);
+      transform: translateY(100px); opacity: 0;
+      transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+      z-index: 9999; display: flex; align-items: center; gap: 10px;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    [dir="rtl"] .toast { right: 30px; }
+    [dir="ltr"] .toast { left: 30px; }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--glass-b);
+      padding: 60px 0 30px;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand p { color: var(--text-dim); font-size: 0.9rem; margin-top: 16px; line-height: 1.8; }
+    .footer-col h4 {
+      font-size: 0.85rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 2px;
+      margin-bottom: 20px; color: var(--text-dim);
+    }
+    .footer-col ul { display: flex; flex-direction: column; gap: 12px; }
+    .footer-col ul a { font-size: 0.9rem; color: var(--text-dim); transition: var(--transition); }
+    .footer-col ul a:hover { color: var(--primary); }
+    .social-links { display: flex; gap: 12px; margin-top: 20px; }
+    .social-btn {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--glass); border: 1px solid var(--glass-b);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-dim); font-size: 0.95rem;
+      transition: var(--transition);
+    }
+    .social-btn:hover {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-color: transparent; color: #fff;
+      transform: translateY(-3px);
+    }
+    .footer-bottom {
+      border-top: 1px solid var(--glass-b);
+      padding-top: 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .footer-bottom p { font-size: 0.85rem; color: var(--text-dim); }
+    .footer-bottom span { color: var(--primary); }
+
+    /* ============================================================
+       ANIMATIONS
+    ============================================================ */
+    @keyframes fadeSlideDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0; transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    /* ============================================================
+       SCROLL TO TOP
+    ============================================================ */
+    .scroll-top {
+      position: fixed; bottom: 30px;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border: none; cursor: pointer; color: #fff; font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 8px 24px rgba(108,99,255,0.4);
+      opacity: 0; pointer-events: none; transform: translateY(20px);
+      transition: var(--transition); z-index: 999;
+    }
+    .scroll-top.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .scroll-top:hover { transform: translateY(-4px); }
+    [dir="rtl"] .scroll-top { left: 30px; }
+    [dir="ltr"] .scroll-top { right: 30px; }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 1024px) {
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-visual { order: -1; }
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+      .hero-visual { display: none; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      section { padding: 70px 0; }
+      .hero-stats { gap: 24px; }
+      .process-steps::before { display: none; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Background glow -->
+<div class="bg-glow"></div>
+
+<!-- Toast Notification -->
+<div class="toast" id="toast">
+  <i class="fas fa-check-circle"></i>
+  <span id="toast-msg"></span>
+</div>
+
+<!-- Scroll to Top -->
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Scroll to top">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<!-- ====================================================
+     NAVBAR
+==================================================== -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#home" class="nav-logo">
+        <div class="logo-icon"><i class="fas fa-microchip"></i></div>
+        <span>TechBase</span>
+      </a>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#home" class="nav-link active" data-key="nav_home"></a>
+        <a href="#about" class="nav-link" data-key="nav_about"></a>
+        <a href="#services" class="nav-link" data-key="nav_services"></a>
+        <a href="#process" class="nav-link" data-key="nav_process"></a>
+        <a href="#contact" class="nav-link" data-key="nav_contact"></a>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="lang-switcher">
+          <button class="lang-btn active" id="btn-ar" onclick="setLang('ar')">ع</button>
+          <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+          <button class="lang-btn" id="btn-fr" onclick="setLang('fr')">FR</button>
+        </div>
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="toggleMenu()"><i class="fas fa-times"></i></button>
+  <a href="#home" onclick="toggleMenu()" data-key="nav_home"></a>
+  <a href="#about" onclick="toggleMenu()" data-key="nav_about"></a>
+  <a href="#services" onclick="toggleMenu()" data-key="nav_services"></a>
+  <a href="#process" onclick="toggleMenu()" data-key="nav_process"></a>
+  <a href="#contact" onclick="toggleMenu()" data-key="nav_contact"></a>
+</div>
+
+<!-- ====================================================
+     HERO SECTION
+==================================================== -->
+<section id="home">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i class="fas fa-bolt"></i>
+        <span data-key="hero_badge"></span>
+      </div>
+      <h1 class="hero-title">
+        <span data-key="hero_title_1"></span><br/>
+        <span class="gradient-text" data-key="hero_title_2"></span>
+      </h1>
+      <p class="hero-desc" data-key="hero_desc"></p>
+      <div class="hero-actions">
+        <a href="#services" class="btn-primary">
+          <i class="fas fa-rocket"></i>
+          <span data-key="hero_cta1"></span>
+        </a>
+        <a href="#contact" class="btn-outline">
+          <i class="fas fa-phone"></i>
+          <span data-key="hero_cta2"></span>
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">+150</div>
+          <div class="stat-label" data-key="stat1"></div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">+10</div>
+          <div class="stat-label" data-key="stat2"></div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">98%</div>
+          <div class="stat-label" data-key="stat3"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Visual -->
+    <div class="hero-visual">
+      <div class="hero-visual-inner">
+        <i class="fas fa-laptop-code hero-visual-icon"></i>
+        <div class="float-badge">
+          <span class="fbi">🖥️</span>
+          <span data-key="badge1"></span>
+        </div>
+        <div class="float-badge">
+          <span class="fbi">📡</span>
+          <span data-key="badge2"></span>
+        </div>
+        <div class="float-badge">
+          <span class="fbi">🔒</span>
+          <span data-key="badge3"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================
+     ABOUT SECTION
+==================================================== -->
+<section id="about">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag" data-key="about_tag"></div>
+      <h2 class="section-title">
+        <span data-key="about_title_1"></span>
+        <span class="gradient-text" data-key="about_title_2"></span>
+      </h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <div class="about-card-main">
+          <i class="fas fa-server about-icon-big"></i>
+          <h3 data-key="about_card_title"></h3>
+          <p data-key="about_card_desc"></p>
+        </div>
+      </div>
+
+      <div class="about-content reveal reveal-delay-2">
+        <h2>
+          <span data-key="about_content_title"></span>
+          <span class="gradient-text" data-key="about_content_title2"></span>
+        </h2>
+        <p data-key="about_content_p1"></p>
+        <p data-key="about_content_p2"></p>
+        <div class="about-features">
+          <div class="about-feat reveal reveal-delay-1">
+            <div class="about-feat-icon"><i class="fas fa-check"></i></div>
+            <div class="about-feat-text">
+              <h4 data-key="feat1_title"></h4>
+              <p data-key="feat1_desc"></p>
+            </div>
+          </div>
+          <div class="about-feat reveal reveal-delay-2">
+            <div class="about-feat-icon"><i class="fas fa-users"></i></div>
+            <div class="about-feat-text">
+              <h4 data-key="feat2_title"></h4>
+              <p data-key="feat2_desc"></p>
+            </div>
+          </div>
+          <div class="about-feat reveal reveal-delay-3">
+            <div class="about-feat-icon"><i class="fas fa-shield-alt"></i></div>
+            <div class="about-feat-text">
+              <h4 data-key="feat3_title"></h4>
+              <p data-key="feat3_desc"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================
+     SERVICES SECTION
+==================================================== -->
+<section id="services">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag" data-key="services_tag"></div>
+      <h2 class="section-title">
+        <span data-key="services_title_1"></span>
+        <span class="gradient-text" data-key="services_title_2"></span>
+      </h2>
+      <p class="section-desc" data-key="services_desc"></p>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="services-grid">
+      <!-- Service 1 -->
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon"><i class="fas fa-desktop"></i></div>
+        <h3 data-key="svc1_title"></h3>
+        <p data-key="svc1_desc"></p>
+        <a href="#contact" class="service-link">
+          <span data-key="learn_more"></span>
+          <i class="fas fa-arrow-left svc-arrow"></i>
+        </a>
+      </div>
+      <!-- Service 2 -->
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon"><i class="fas fa-network-wired"></i></div>
+        <h3 data-key="svc2_title"></h3>
+        <p data-key="svc2_desc"></p>
+        <a href="#contact" class="service-link">
+          <span data-key="learn_more"></span>
+          <i class="fas fa-arrow-left svc-arrow"></i>
+        </a>
+      </div>
+      <!-- Service 3 -->
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-icon"><i class="fas fa-school"></i></div>
+        <h3 data-key="svc3_title"></h3>
+        <p data-key="svc3_desc"></p>
+        <a href="#contact" class="service-link">
+          <span data-key="learn_more"></span>
+          <i class="fas fa-arrow-left svc-arrow"></i>
+        </a>
+      </div>
+      <!-- Service 4 -->
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon"><i class="fas fa-print"></i></div>
+        <h3 data-key="svc4_title"></h3>
+        <p data-key="svc4_desc"></p>
+        <a href="#contact" class="service-link">
+          <span data-key="learn_more"></span>
+          <i class="fas fa-arrow-left svc-arrow"></i>
+        </a>
+      </div>
+      <!-- Service 5 -->
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon"><i class="fas fa-code"></i></div>
+        <h3 data-key="svc5_title"></h3>
+        <p data-key="svc5_desc"></p>
+        <a href="#contact" class="service-link">
+          <span data-key="learn_more"></span>
+          <i class="fas fa-arrow-left svc-arrow"></i>
+        </a>
+      </div>
+      <!-- Service 6 -->
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-icon"><i class="fas fa-database"></i></div>
+        <h3 data-key="svc6_title"></h3>
+        <p data-key="svc6_desc"></p>
+        <a href="#contact" class="service-link">
+          <span data-key="learn_more"></span>
+          <i class="fas fa-arrow-left svc-arrow"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================
+     PROCESS SECTION
+==================================================== -->
+<section id="process">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag" data-key="process_tag"></div>
+      <h2 class="section-title">
+        <span data-key="process_title_1"></span>
+        <span class="gradient-text" data-key="process_title_2"></span>
+      </h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="process-steps">
+      <div class="step-card reveal reveal-delay-1">
+        <div class="step-num">01</div>
+        <h3 data-key="step1_title"></h3>
+        <p data-key="step1_desc"></p>
+      </div>
+      <div class="step-card reveal reveal-delay-2">
+        <div class="step-num">02</div>
+        <h3 data-key="step2_title"></h3>
+        <p data-key="step2_desc"></p>
+      </div>
+      <div class="step-card reveal reveal-delay-3">
+        <div class="step-num">03</div>
+        <h3 data-key="step3_title"></h3>
+        <p data-key="step3_desc"></p>
+      </div>
+      <div class="step-card reveal reveal-delay-4">
+        <div class="step-num">04</div>
+        <h3 data-key="step4_title"></h3>
+        <p data-key="step4_desc"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================
+     CONTACT SECTION
+==================================================== -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag" data-key="contact_tag"></div>
+      <h2 class="section-title">
+        <span data-key="contact_title_1"></span>
+        <span class="gradient-text" data-key="contact_title_2"></span>
+      </h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <h2 data-key="contact_sub"></h2>
+        <p data-key="contact_desc"></p>
+        <div class="contact-items">
+          <div class="contact-item">
+            <div class="ci-icon"><i class="fas fa-phone"></i></div>
+            <div class="ci-text">
+              <strong data-key="ct_phone"></strong>
+              <span>+213 XX XXX XXXX</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="ci-icon"><i class="fas fa-envelope"></i></div>
+            <div class="ci-text">
+              <strong data-key="ct_email"></strong>
+              <span>contact@techbase.dz</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="ci-text">
+              <strong data-key="ct_address"></strong>
+              <span data-key="ct_address_val"></span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="ci-icon"><i class="fas fa-clock"></i></div>
+            <div class="ci-text">
+              <strong data-key="ct_hours"></strong>
+              <span data-key="ct_hours_val"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form reveal reveal-delay-2">
+        <form id="contactForm" onsubmit="submitForm(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label data-key="form_name"></label>
+              <input type="text" id="form-name" data-key-placeholder="form_name_ph" required />
+            </div>
+            <div class="form-group">
+              <label data-key="form_email"></label>
+              <input type="email" id="form-email" data-key-placeholder="form_email_ph" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label data-key="form_phone"></label>
+            <input type="tel" id="form-phone" data-key-placeholder="form_phone_ph" />
+          </div>
+          <div class="form-group">
+            <label data-key="form_service"></label>
+            <select id="form-service">
+              <option value="" data-key="form_service_default"></option>
+              <option value="hardware" data-key="svc1_title"></option>
+              <option value="network" data-key="svc2_title"></option>
+              <option value="school" data-key="svc3_title"></option>
+              <option value="printer" data-key="svc4_title"></option>
+              <option value="software" data-key="svc5_title"></option>
+              <option value="backup" data-key="svc6_title"></option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label data-key="form_msg"></label>
+            <textarea id="form-message" data-key-placeholder="form_msg_ph" required></textarea>
+          </div>
+          <button type="submit" class="btn-submit" id="submitBtn">
+            <i class="fas fa-paper-plane"></i>
+            <span data-key="form_submit"></span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================
+     FOOTER
+==================================================== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#home" class="nav-logo">
+          <div class="logo-icon"><i class="fas fa-microchip"></i></div>
+          <span>TechBase</span>
+        </a>
+        <p data-key="footer_desc"></p>
+        <div class="social-links">
+          <a href="#" class="social-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-btn" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4 data-key="footer_links"></h4>
+        <ul>
+          <li><a href="#home" data-key="nav_home"></a></li>
+          <li><a href="#about" data-key="nav_about"></a></li>
+          <li><a href="#services" data-key="nav_services"></a></li>
+          <li><a href="#contact" data-key="nav_contact"></a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-key="footer_services"></h4>
+        <ul>
+          <li><a href="#services" data-key="svc1_title"></a></li>
+          <li><a href="#services" data-key="svc2_title"></a></li>
+          <li><a href="#services" data-key="svc3_title"></a></li>
+          <li><a href="#services" data-key="svc4_title"></a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-key="footer_contact"></h4>
+        <ul>
+          <li><a href="tel:+213XXXXXXXXX">+213 XX XXX XXXX</a></li>
+          <li><a href="mailto:contact@techbase.dz">contact@techbase.dz</a></li>
+          <li><a href="#contact" data-key="ct_address_val"></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 <span>TechBase Services</span>. <span data-key="footer_rights"></span></p>
+      <p data-key="footer_made"></p>
+    </div>
+  </div>
+</footer>
+
+<!-- ====================================================
+     JAVASCRIPT
+==================================================== -->
+<script>
+  // ============================================================
+  // TRANSLATIONS
+  // ============================================================
+  const translations = {
+    ar: {
+      // Nav
+      nav_home: "الرئيسية",
+      nav_about: "من نحن",
+      nav_services: "خدماتنا",
+      nav_process: "كيف نعمل",
+      nav_contact: "تواصل معنا",
+      // Hero
+      hero_badge: "خدمات الإعلام الآلي القاعدية",
+      hero_title_1: "حلول تقنية متكاملة",
+      hero_title_2: "للمكاتب والمدارس",
+      hero_desc: "نقدم خدمات الصيانة والدعم التقني الشامل للحواسيب، الشبكات، والطابعات — بسرعة احترافية وضمان موثوق.",
+      hero_cta1: "اكتشف خدماتنا",
+      hero_cta2: "تواصل معنا",
+      stat1: "عميل راضٍ",
+      stat2: "سنوات خبرة",
+      stat3: "رضا العملاء",
+      badge1: "صيانة الحواسيب",
+      badge2: "شبكات WiFi",
+      badge3: "حماية البيانات",
+      // About
+      about_tag: "من نحن",
+      about_title_1: "خبرة وثقة في ",
+      about_title_2: "عالم التقنية",
+      about_card_title: "بنيتنا التحتية",
+      about_card_desc: "نمتلك فريقاً متخصصاً وأدوات احترافية لضمان أفضل خدمة تقنية.",
+      about_content_title: "نحن ",
+      about_content_title2: "شركاء نجاحكم التقني",
+      about_content_p1: "تأسست شركة TechBase لتقديم حلول الإعلام الآلي القاعدية للمكاتب والمدارس الجزائرية. نؤمن بأن التكنولوجيا يجب أن تكون في متناول الجميع.",
+      about_content_p2: "فريقنا من المهنيين المعتمدين يضمن لك الحصول على أفضل خدمة تقنية بأسرع وقت وبأسعار مناسبة.",
+      feat1_title: "جودة معتمدة",
+      feat1_desc: "نستخدم قطع غيار أصلية ومعتمدة في جميع أعمال الصيانة.",
+      feat2_title: "فريق متخصص",
+      feat2_desc: "مهندسون وتقنيون معتمدون بخبرة تزيد عن 10 سنوات.",
+      feat3_title: "أمان تام",
+      feat3_desc: "نضمن سلامة بياناتكم وخصوصيتها في جميع مراحل العمل.",
+      // Services
+      services_tag: "خدماتنا",
+      services_title_1: "كل ما تحتاجه من ",
+      services_title_2: "دعم تقني",
+      services_desc: "نقدم مجموعة شاملة من الخدمات التقنية لضمان استمرارية عملكم دون انقطاع.",
+      svc1_title: "صيانة الحواسيب",
+      svc1_desc: "تشخيص وإصلاح الحواسيب المكتبية والمحمولة، تركيب المكونات، وتحسين الأداء.",
+      svc2_title: "الشبكات الداخلية",
+      svc2_desc: "تصميم وتركيب شبكات LAN وWiFi، إعداد الراوترات والسويتشات لبيئات العمل.",
+      svc3_title: "دعم المدارس",
+      svc3_desc: "خدمات تقنية مخصصة للمدارس: تجهيز قاعات الإعلام الآلي، صيانة دورية، ودعم مستمر.",
+      svc4_title: "صيانة الطابعات",
+      svc4_desc: "إصلاح وصيانة جميع أنواع الطابعات، تعبئة الحبر والكارتريدج، وقطع الغيار.",
+      svc5_title: "البرمجيات والأنظمة",
+      svc5_desc: "تثبيت أنظمة التشغيل، البرامج المكتبية، برامج الحماية، والتحديثات الدورية.",
+      svc6_title: "النسخ الاحتياطي",
+      svc6_desc: "حلول احترافية للنسخ الاحتياطي وحماية البيانات، واسترجاع المعلومات المفقودة.",
+      learn_more: "اعرف المزيد",
+      // Process
+      process_tag: "كيف نعمل",
+      process_title_1: "خطواتنا نحو ",
+      process_title_2: "الحل الأمثل",
+      step1_title: "التواصل والتشخيص",
+      step1_desc: "نستقبل طلبكم ونجري تشخيصاً أولياً للمشكلة عبر الهاتف أو الموقع.",
+      step2_title: "التقييم والتقدير",
+      step2_desc: "يزور فريقنا موقعكم لتقييم المشكلة وتقديم عرض سعر شفاف.",
+      step3_title: "التنفيذ والإصلاح",
+      step3_desc: "ينفذ مهندسونا الحل بسرعة وكفاءة باستخدام أفضل المعدات.",
+      step4_title: "المتابعة والضمان",
+      step4_desc: "نتابع معكم بعد الإصلاح ونقدم ضماناً على جميع أعمالنا.",
+      // Contact
+      contact_tag: "تواصل معنا",
+      contact_title_1: "نحن هنا من أجل ",
+      contact_title_2: "مساعدتكم",
+      contact_sub: "ابدأ المحادثة معنا",
+      contact_desc: "هل لديك سؤال أو تحتاج إلى خدمة تقنية؟ فريقنا جاهز للمساعدة في أسرع وقت.",
+      ct_phone: "الهاتف",
+      ct_email: "البريد الإلكتروني",
+      ct_address: "العنوان",
+      ct_address_val: "الجزائر العاصمة، الجزائر",
+      ct_hours: "ساعات العمل",
+      ct_hours_val: "الأحد - الخميس: 8ص - 5م",
+      form_name: "الاسم الكامل",
+      form_name_ph: "أدخل اسمك",
+      form_email: "البريد الإلكتروني",
+      form_email_ph: "example@mail.com",
+      form_phone: "رقم الهاتف",
+      form_phone_ph: "+213 XX XXX XXXX",
+      form_service: "الخدمة المطلوبة",
+      form_service_default: "-- اختر خدمة --",
+      form_msg: "رسالتك",
+      form_msg_ph: "اكتب رسالتك هنا...",
+      form_submit: "إرسال الرسالة",
+      toast_success: "✅ تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.",
+      // Footer
+      footer_desc: "نقدم أفضل خدمات الإعلام الآلي القاعدية للمكاتب والمدارس في الجزائر.",
+      footer_links: "روابط سريعة",
+      footer_services: "خدماتنا",
+      footer_contact: "تواصل معنا",
+      footer_rights: "جميع الحقوق محفوظة.",
+      footer_made: "صُنع بـ ❤️ في الجزائر",
+    },
+    en: {
+      nav_home: "Home",
+      nav_about: "About",
+      nav_services: "Services",
+      nav_process: "How We Work",
+      nav_contact: "Contact",
+      hero_badge: "Basic IT Services",
+      hero_title_1: "Complete Technical Solutions",
+      hero_title_2: "for Offices & Schools",
+      hero_desc: "We provide comprehensive maintenance and technical support for computers, networks, and printers — with professional speed and reliable warranty.",
+      hero_cta1: "Explore Services",
+      hero_cta2: "Contact Us",
+      stat1: "Happy Clients",
+      stat2: "Years Experience",
+      stat3: "Client Satisfaction",
+      badge1: "PC Maintenance",
+      badge2: "WiFi Networks",
+      badge3: "Data Security",
+      about_tag: "About Us",
+      about_title_1: "Experience & Trust in ",
+      about_title_2: "the Tech World",
+      about_card_title: "Our Infrastructure",
+      about_card_desc: "We have a specialized team and professional tools to ensure the best technical service.",
+      about_content_title: "We Are ",
+      about_content_title2: "Your Tech Success Partners",
+      about_content_p1: "TechBase was founded to provide basic IT solutions to Algerian offices and schools. We believe technology should be accessible to everyone.",
+      about_content_p2: "Our team of certified professionals ensures you get the best technical service in the shortest time at affordable prices.",
+      feat1_title: "Certified Quality",
+      feat1_desc: "We use original and certified spare parts in all maintenance work.",
+      feat2_title: "Expert Team",
+      feat2_desc: "Certified engineers and technicians with over 10 years of experience.",
+      feat3_title: "Full Security",
+      feat3_desc: "We guarantee the safety and privacy of your data at all stages.",
+      services_tag: "Our Services",
+      services_title_1: "Everything You Need in ",
+      services_title_2: "Technical Support",
+      services_desc: "We offer a comprehensive range of IT services to ensure your operations run without interruption.",
+      svc1_title: "Computer Maintenance",
+      svc1_desc: "Diagnosis and repair of desktops and laptops, component installation, and performance optimization.",
+      svc2_title: "Internal Networks",
+      svc2_desc: "Design and installation of LAN and WiFi networks, router and switch configuration for work environments.",
+      svc3_title: "School IT Support",
+      svc3_desc: "Dedicated IT services for schools: computer lab setup, periodic maintenance, and ongoing support.",
+      svc4_title: "Printer Maintenance",
+      svc4_desc: "Repair and maintenance of all printer types, ink and cartridge refill, and spare parts.",
+      svc5_title: "Software & Systems",
+      svc5_desc: "OS installation, office software, antivirus programs, and regular updates.",
+      svc6_title: "Data Backup",
+      svc6_desc: "Professional backup solutions, data protection, and lost data recovery.",
+      learn_more: "Learn More",
+      process_tag: "How We Work",
+      process_title_1: "Our Steps Toward ",
+      process_title_2: "the Best Solution",
+      step1_title: "Contact & Diagnosis",
+      step1_desc: "We receive your request and perform an initial diagnosis via phone or our website.",
+      step2_title: "Assessment & Quote",
+      step2_desc: "Our team visits your location to assess the issue and provide a transparent quote.",
+      step3_title: "Implementation & Repair",
+      step3_desc: "Our engineers execute the solution quickly and efficiently using the best equipment.",
+      step4_title: "Follow-up & Warranty",
+      step4_desc: "We follow up with you after the fix and provide a warranty on all our work.",
+      contact_tag: "Contact Us",
+      contact_title_1: "We Are Here to ",
+      contact_title_2: "Help You",
+      contact_sub: "Start the Conversation",
+      contact_desc: "Have a question or need a technical service? Our team is ready to help as quickly as possible.",
+      ct_phone: "Phone",
+      ct_email: "Email",
+      ct_address: "Address",
+      ct_address_val: "Algiers, Algeria",
+      ct_hours: "Working Hours",
+      ct_hours_val: "Sun - Thu: 8AM - 5PM",
+      form_name: "Full Name",
+      form_name_ph: "Enter your name",
+      form_email: "Email Address",
+      form_email_ph: "example@mail.com",
+      form_phone: "Phone Number",
+      form_phone_ph: "+213 XX XXX XXXX",
+      form_service: "Service Required",
+      form_service_default: "-- Choose a service --",
+      form_msg: "Your Message",
+      form_msg_ph: "Type your message here...",
+      form_submit: "Send Message",
+      toast_success: "✅ Message sent successfully! We'll contact you soon.",
+      footer_desc: "We provide the best basic IT services for offices and schools in Algeria.",
+      footer_links: "Quick Links",
+      footer_services: "Services",
+      footer_contact: "Contact",
+      footer_rights: "All rights reserved.",
+      footer_made: "Made with ❤️ in Algeria",
+    },
+    fr: {
+      nav_home: "Accueil",
+      nav_about: "À Propos",
+      nav_services: "Services",
+      nav_process: "Comment on travaille",
+      nav_contact: "Contact",
+      hero_badge: "Services Informatiques de Base",
+      hero_title_1: "Solutions Techniques Complètes",
+      hero_title_2: "pour Bureaux & Écoles",
+      hero_desc: "Nous offrons une maintenance complète et un support technique pour les ordinateurs, réseaux et imprimantes — avec rapidité professionnelle et garantie fiable.",
+      hero_cta1: "Nos Services",
+      hero_cta2: "Nous Contacter",
+      stat1: "Clients Satisfaits",
+      stat2: "Ans d'Expérience",
+      stat3: "Satisfaction Client",
+      badge1: "Maintenance PC",
+      badge2: "Réseaux WiFi",
+      badge3: "Sécurité Données",
+      about_tag: "À Propos de Nous",
+      about_title_1: "Expertise & Confiance dans ",
+      about_title_2: "le Monde Numérique",
+      about_card_title: "Notre Infrastructure",
+      about_card_desc: "Nous disposons d'une équipe spécialisée et d'outils professionnels pour le meilleur service.",
+      about_content_title: "Nous Sommes ",
+      about_content_title2: "Vos Partenaires Tech",
+      about_content_p1: "TechBase a été fondée pour fournir des solutions informatiques de base aux bureaux et écoles algériens. Nous croyons que la technologie doit être accessible à tous.",
+      about_content_p2: "Notre équipe de professionnels certifiés vous garantit le meilleur service technique dans les délais les plus courts et à des prix abordables.",
+      feat1_title: "Qualité Certifiée",
+      feat1_desc: "Nous utilisons des pièces détachées originales et certifiées pour toutes les réparations.",
+      feat2_title: "Équipe Experte",
+      feat2_desc: "Ingénieurs et techniciens certifiés avec plus de 10 ans d'expérience.",
+      feat3_title: "Sécurité Totale",
+      feat3_desc: "Nous garantissons la sécurité et la confidentialité de vos données à toutes les étapes.",
+      services_tag: "Nos Services",
+      services_title_1: "Tout ce dont Vous Avez Besoin en ",
+      services_title_2: "Support Technique",
+      services_desc: "Nous offrons une gamme complète de services IT pour assurer la continuité de vos opérations.",
+      svc1_title: "Maintenance Informatique",
+      svc1_desc: "Diagnostic et réparation de PC et laptops, installation de composants, optimisation des performances.",
+      svc2_title: "Réseaux Internes",
+      svc2_desc: "Conception et installation de réseaux LAN et WiFi, configuration de routeurs et switchs.",
+      svc3_title: "Support Scolaire",
+      svc3_desc: "Services IT dédiés aux écoles : équipement des salles informatiques, maintenance et support continu.",
+      svc4_title: "Maintenance Imprimantes",
+      svc4_desc: "Réparation de toutes les imprimantes, rechargement de cartouches et pièces détachées.",
+      svc5_title: "Logiciels & Systèmes",
+      svc5_desc: "Installation des OS, logiciels bureautiques, antivirus et mises à jour régulières.",
+      svc6_title: "Sauvegarde de Données",
+      svc6_desc: "Solutions de sauvegarde professionnelles, protection et récupération de données perdues.",
+      learn_more: "En Savoir Plus",
+      process_tag: "Notre Processus",
+      process_title_1: "Nos Étapes vers ",
+      process_title_2: "la Solution Optimale",
+      step1_title: "Contact & Diagnostic",
+      step1_desc: "Nous recevons votre demande et effectuons un diagnostic initial par téléphone ou via le site.",
+      step2_title: "Évaluation & Devis",
+      step2_desc: "Notre équipe visite votre site pour évaluer le problème et fournir un devis transparent.",
+      step3_title: "Exécution & Réparation",
+      step3_desc: "Nos ingénieurs exécutent la solution rapidement et efficacement avec le meilleur matériel.",
+      step4_title: "Suivi & Garantie",
+      step4_desc: "Nous assurons un suivi après la réparation et offrons une garantie sur tous nos travaux.",
+      contact_tag: "Contactez-nous",
+      contact_title_1: "Nous Sommes là pour ",
+      contact_title_2: "Vous Aider",
+      contact_sub: "Commençons la Conversation",
+      contact_desc: "Vous avez une question ou besoin d'un service IT ? Notre équipe est prête à vous aider rapidement.",
+      ct_phone: "Téléphone",
+      ct_email: "Email",
+      ct_address: "Adresse",
+      ct_address_val: "Alger, Algérie",
+      ct_hours: "Heures de Travail",
+      ct_hours_val: "Dim - Jeu : 8h - 17h",
+      form_name: "Nom Complet",
+      form_name_ph: "Entrez votre nom",
+      form_email: "Adresse Email",
+      form_email_ph: "example@mail.com",
+      form_phone: "Numéro de Téléphone",
+      form_phone_ph: "+213 XX XXX XXXX",
+      form_service: "Service Requis",
+      form_service_default: "-- Choisissez un service --",
+      form_msg: "Votre Message",
+      form_msg_ph: "Écrivez votre message ici...",
+      form_submit: "Envoyer le Message",
+      toast_success: "✅ Message envoyé avec succès ! Nous vous contacterons bientôt.",
+      footer_desc: "Nous offrons les meilleurs services informatiques de base pour bureaux et écoles en Algérie.",
+      footer_links: "Liens Rapides",
+      footer_services: "Services",
+      footer_contact: "Contact",
+      footer_rights: "Tous droits réservés.",
+      footer_made: "Fait avec ❤️ en Algérie",
+    }
+  };
+
+  // ============================================================
+  // LANGUAGE SYSTEM
+  // ============================================================
+  let currentLang = 'ar';
+
+  function setLang(lang) {
+    currentLang = lang;
+    const t = translations[lang];
+    const isRTL = lang === 'ar';
+
+    // Set direction & lang attr
+    document.documentElement.lang = lang;
+    document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
+    document.body.classList.toggle('ltr', !isRTL);
+
+    // Update all data-key elements
+    document.querySelectorAll('[data-key]').forEach(el => {
+      const key = el.getAttribute('data-key');
+      if (t[key] !== undefined) el.textContent = t[key];
+    });
+
+    // Update placeholders
+    document.querySelectorAll('[data-key-placeholder]').forEach(el => {
+      const key = el.getAttribute('data-key-placeholder');
+      if (t[key] !== undefined) el.placeholder = t[key];
+    });
+
+    // Update select options
+    document.querySelectorAll('select option[data-key]').forEach(el => {
+      const key = el.getAttribute('data-key');
+      if (t[key] !== undefined) el.textContent = t[key];
+    });
+
+    // Service arrows direction
+    document.querySelectorAll('.svc-arrow').forEach(icon => {
+      icon.className = isRTL
+        ? 'fas fa-arrow-left svc-arrow'
+        : 'fas fa-arrow-right svc-arrow';
+    });
+
+    // Active lang button
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('btn-' + lang).classList.add('active');
+
+    // Update document title & meta description
+    document.title = lang === 'ar'
+      ? 'TechBase | خدمات الإعلام الآلي'
+      : lang === 'fr'
+      ? 'TechBase | Services Informatiques'
+      : 'TechBase | IT Services';
+
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.content = t.hero_desc || '';
+  }
+
+  // ============================================================
+  // NAVBAR SCROLL
+  // ============================================================
+  const navbar = document.getElementById('navbar');
+  const scrollTop = document.getElementById('scrollTop');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) {
+      navbar.classList.add('scrolled');
+      scrollTop.classList.add('show');
+    } else {
+      navbar.classList.remove('scrolled');
+      scrollTop.classList.remove('show');
+    }
+
+    // Active nav link
+    const sections = ['home','about','services','process','contact'];
+    let current = '';
+    sections.forEach(id => {
+      const sec = document.getElementById(id);
+      if (sec && window.scrollY >= sec.offsetTop - 100) current = id;
+    });
+    document.querySelectorAll('.nav-link').forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
+
+  // ============================================================
+  // MOBILE MENU
+  // ============================================================
+  function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const ham = document.getElementById('hamburger');
+    menu.classList.toggle('open');
+    ham.classList.toggle('open');
+    document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+  }
+
+  // ============================================================
+  // SCROLL REVEAL
+  // ============================================================
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+  // ============================================================
+  // CONTACT FORM
+  // ============================================================
+  function submitForm(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    const t = translations[currentLang];
+
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+
+    setTimeout(() => {
+      btn.disabled = false;
+      btn.innerHTML = `<i class="fas fa-paper-plane"></i> <span>${t.form_submit}</span>`;
+      document.getElementById('contactForm').reset();
+      showToast(t.toast_success);
+    }, 1500);
+  }
+
+  function showToast(msg) {
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toast-msg');
+    toastMsg.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 4500);
+  }
+
+  // ============================================================
+  // COUNTER ANIMATION
+  // ============================================================
+  function animateCounters() {
+    document.querySelectorAll('.stat-num').forEach(el => {
+      const target = parseInt(el.textContent.replace(/[^0-9]/g, ''));
+      const suffix = el.textContent.replace(/[0-9]/g, '');
+      let count = 0;
+      const step = Math.ceil(target / 50);
+      const timer = setInterval(() => {
+        count = Math.min(count + step, target);
+        el.textContent = suffix.includes('%') ? count + '%' : '+' + count;
+        if (count >= target) clearInterval(timer);
+      }, 30);
+    });
+  }
+
+  const statsObs = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) { animateCounters(); statsObs.disconnect(); }
+  }, { threshold: 0.5 });
+
+  const statsEl = document.querySelector('.hero-stats');
+  if (statsEl) statsObs.observe(statsEl);
+
+  // ============================================================
+  // INIT
+  // ============================================================
+  document.addEventListener('DOMContentLoaded', () => {
+    setLang('ar');
+  });
+</script>
+
+</body>
+</html>
